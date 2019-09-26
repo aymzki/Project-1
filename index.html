@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cocktail API</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    <style type="text/css">
+        button,
+        div,
+        form,
+        input {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="jumbotron" style="background-color: #20315A ; color: white;">
+            <h1 class="text-center">
+                <strong>
+                    <i class="fa fa-newspaper-o"></i> Testing the Cocktail APIs!</strong>
+            </h1>
+        </div>
+
+        <div>
+            <h1>Cocktail Search</h1>
+
+            <div>
+                <form id="gif-form">
+                    <label for="gif-input">Enter a main recipe ingredient</label>
+                    <input type="text" id="gif-input"><br>
+                    <input id="add-gif" type="submit" value="Submit">
+                </form>
+            </div>
+
+            <div>
+                <h2>
+                    Your Cocktails:
+                </h2>
+            </div>
+
+            <div id="gifs-display""></div>   <!-- Gifs to be displayed here-->
+
+        <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script> 
+        <script type="text/javascript">
+                    var drinkIngredient = "";
+                    var recipeIngredient = "";
+                    var cocktails = {measurements:[], ingredients:[]}; 
+                    var myArray = [];
+
+                    function showDrinkNameIdPix() {
+
+                        var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=" + drinkIngredient;
+
+                        $.ajax({
+                            url: queryURL,
+                            method: "GET"
+                        }).then(function (response) {
+
+                            var results = response.drinks;
+
+                            for (var i = 0; i < results.length; i++) { //to get the drink Names 
+                               
+                                var drinkID = results[i].idDrink;
+                                displayFullInfo(drinkID);
+
+                            }
+
+                        });
+                    }
+
+                    function displayFullInfo(drinkID) {
+
+                        var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=" + drinkID;
+                        
+                    
+                        $.ajax({
+                            url: queryURL,
+                            method: "GET"
+                        }).then(function (response) {
+
+                            console.log(queryURL);
+                            console.log(response.drinks);
+
+                            var results = response.drinks;
+
+                            for (var i = 0; i < results.length; i++) { 
+                                
+                                //to get the drink Names 
+                                var drinkName = results[i].strDrink; 
+                                var nameDisplay=$("<p>").text("Drink Name: " + drinkName);
+
+                                //to get instructions
+                                var drinkInstuctions = results[i].strInstructions;
+                                var instructionsDisplay = $("<p>").text("Instructions: " + drinkInstuctions);
+
+                                //to get the jpgs
+                                var foundGif = $("<img>");
+                                foundGif.attr("src", results[i].strDrinkThumb);
+                                foundGif.attr("class", "drinkGif");
+
+                                //create a new div to hold all the stuff above
+                                var gifDiv = $("<div>");
+                                gifDiv.append(nameDisplay);
+                                gifDiv.append(instructionsDisplay);
+                                gifDiv.append(foundGif);
+
+                                //append the div to the well
+                                $("#gifs-display").prepend(gifDiv);
+
+                            }
+                        });
+                    }
+
+
+                    $("#add-gif").on("click", function (event) {
+                        event.preventDefault();
+                        recipeIngredient = $("#gif-input").val().trim(); //determined by recipe selected
+                        if(recipeIngredient === "chicken") { drinkIngredient = "vodka"; } else {
+                            drinkIngredient = "gin";
+                        } showDrinkNameIdPix(); $("#gif-input").val(""); //clears the search term field when its button is created
+                        
+                    }); 
+                    
+                    </script>
+</body>
+
+</html>

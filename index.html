@@ -101,15 +101,15 @@
                                 var instructionsDisplay = $("<p>").text("Instructions: " + drinkInstuctions);
 
                                 //to get the jpgs
-                                var foundGif = $("<img>");
-                                foundGif.attr("src", results[i].strDrinkThumb);
-                                foundGif.attr("class", "drinkGif");
+                                var pixDisplay = $("<img>");
+                                pixDisplay.attr("src", results[i].strDrinkThumb);
+                                pixDisplay.attr("class", "drinkGif");
 
                                 //create a new div to hold all the stuff above
                                 var gifDiv = $("<div>");
                                 gifDiv.append(nameDisplay);
                                 gifDiv.append(instructionsDisplay);
-                                gifDiv.append(foundGif);
+                                gifDiv.append(pixDisplay);
 
                                 //append the div to the well
                                 $("#gifs-display").prepend(gifDiv);

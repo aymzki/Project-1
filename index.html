@@ -47,12 +47,10 @@
 
             <div id="gifs-display""></div>   <!-- Gifs to be displayed here-->
 
-        <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script> 
-        <script type="text/javascript">
+        <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script> <script
+                type="text/javascript">
                     var drinkIngredient = "";
                     var recipeIngredient = "";
-                    var cocktails = {measurements:[], ingredients:[]}; 
-                    var myArray = [];
 
                     function showDrinkNameIdPix() {
 
@@ -68,9 +66,12 @@
                             for (var i = 0; i < results.length; i++) { //to get the drink Names 
                                
                                 var drinkID = results[i].idDrink;
+
                                 displayFullInfo(drinkID);
+                            
 
                             }
+
 
                         });
                     }
@@ -91,14 +92,43 @@
                             var results = response.drinks;
 
                             for (var i = 0; i < results.length; i++) { 
+
+                                //stores ingredients into an array - not all ingredients will have something listed
+                                var ingredients = [results[i].strIngredient1, results[i].strIngredient2, results[i].strIngredient3, results[i].strIngredient4, results[i].strIngredient5, results[i].strIngredient6, results[i].strIngredient7, results[i].strIngredient8, results[i].strIngredient9, results[i].strIngredient10]
                                 
+                                //stores measurements into an array - not all measurements will have something listed
+                                var measurements = [results[i].strMeasure1, results[i].strMeasure2, results[i].strMeasure3, results[i].strMeasure4, results[i].strMeasure5, results[i].strMeasure6, results[i].strMeasure7, results[i].strMeasure8, results[i].strMeasure9, results[i].strMeasure10]
+                                
+                                //filters the ingredients array of nulls and undefineds
+                                var newIngredientsArray = ingredients.filter(function (element) {
+                                    return element != null && element != "" && element != 0 && element != NaN && element != undefined && element != false;
+                                });
+
+                                 //filters the measurements array of nulls and undefineds
+                                var newMeasurementsArray = measurements.filter(function (element) {
+                                    return element != null && element != "" && element != 0 && element != NaN && element != undefined && element != false;
+                                });
+
+                                //this array combines both the measurements array and the ingredients array based on their indexes
+                                var newArray = newMeasurementsArray.map((e, i) => e + " " + newIngredientsArray[i]);
+
+                                //creates a new paragraph to store everything into at the end
+                                var newPar= $("<p>");
+                                
+                                //this loops through the new array and stores each combintation in their own div which is appended to the paragraph
+                                for(var x=0; x < newArray.length; x++){
+                                var newDiv = $("<div>");
+                                newDiv.text(newArray[x]);
+                                newPar.append(newDiv);
+                                }
+
                                 //to get the drink Names 
                                 var drinkName = results[i].strDrink; 
-                                var nameDisplay=$("<p>").text("Drink Name: " + drinkName);
+                                var nameDisplay=$("<p>").text(drinkName);
 
                                 //to get instructions
                                 var drinkInstuctions = results[i].strInstructions;
-                                var instructionsDisplay = $("<p>").text("Instructions: " + drinkInstuctions);
+                                var instructionsDisplay = $("<p>").text(drinkInstuctions);
 
                                 //to get the jpgs
                                 var pixDisplay = $("<img>");
@@ -106,16 +136,15 @@
                                 pixDisplay.attr("class", "drinkGif");
 
                                 //create a new div to hold all the stuff above
-                                var gifDiv = $("<div>");
-                                gifDiv.append(nameDisplay);
-                                gifDiv.append(instructionsDisplay);
-                                gifDiv.append(pixDisplay);
-
+                                var bigDiv = $("<div>");
+                                bigDiv.append(nameDisplay, newPar, instructionsDisplay, pixDisplay);
+                               
                                 //append the div to the well
-                                $("#gifs-display").prepend(gifDiv);
+                                $("#gifs-display").prepend(bigDiv);
 
                             }
-                        });
+                   
+                            });
                     }
 
 
@@ -125,8 +154,8 @@
                         if(recipeIngredient === "chicken") { drinkIngredient = "vodka"; } else {
                             drinkIngredient = "gin";
                         } showDrinkNameIdPix(); $("#gif-input").val(""); //clears the search term field when its button is created
-                        
                     }); 
+                    
                     
                     </script>
 </body>

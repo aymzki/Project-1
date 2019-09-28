@@ -146,26 +146,25 @@
           var avgWeatherTemp = Math.floor((maxWeatherTemp + minWeatherTemp) / 2);
           console.log(avgWeatherTemp);
           if (avgWeatherTemp <= 32) {
-            var freezingTempFood = ["beef gravy", "beef", "lamb"];
-            mainIngredient = freezingTempFood[0];
+            var freezingTempFood = ["potatoes", "beef", "spinach"];
+            var freezingIndex = [Math.floor(Math.random() * freezingTempFood.length)];
+            mainIngredient = freezingTempFood[freezingIndex];
             console.log(mainIngredient);
-          } else if (avgWeatherTemp > 32 && avgWeatherTemp < 50) {
-            var coldTempFood = ["rice", "chili powder", "potato"];
-            mainIngredient = coldTempFood[0];
+          } else if (avgWeatherTemp > 32 && avgWeatherTemp < 60) {
+            var coldTempFood = ["ginger", "nutmeg", "mushrooms"];
+            var coldIndex = [Math.floor(Math.random() * coldTempFood.length)];
+            mainIngredient = coldTempFood[coldIndex];
             console.log(mainIngredient);
-          } else if (51 < avgWeatherTemp && avgWeatherTemp < 80) {
-            var warmTempFood = ["chicken", "corn"];
-            mainIngredient = warmTempFood[0];
+          } else if (60 <= avgWeatherTemp && avgWeatherTemp < 80) {
+            var warmTempFood = ["garlic", "carrots", "white wine"];
+            var warmIndex = [Math.floor(Math.random() * warmTempFood.length)];
+            mainIngredient = warmTempFood[warmIndex];
             console.log(mainIngredient);
-          } else if (81 < avgWeatherTemp && avgWeatherTemp < 89) {
-            var hotTempFood = ["salmon", "avocado"];
-            mainIngredient = hotTempFood[0];
+          } else{
+            var hotTempFood = ["tomatoes", "parlsey", "leek"];
+            var hotIndex = [Math.floor(Math.random() * hotTempFood.length)];
+            mainIngredient = hotTempFood[hotIndex];
             console.log(mainIngredient);
-          } else {
-            mainIngredient = null;
-            alert("It's too hot to eat or drink anything other than water. Order in and stay hydrated friends!");
-            console.log(mainIngredient)
-            $("#recipe-view").empty();
           };
           generateRecipes();
           $("#city-input").val("");
@@ -189,6 +188,8 @@
         };
 
         function displayFullInfo(drinkID) {
+          drinksArray = [];
+          recipeIngredient = $(this).attr("data-category");
           var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=" + drinkID;
           $.ajax({
             url: queryURL,
@@ -250,8 +251,6 @@
           $("#drinks-view2").html(randomDrinkB);
           $("#drinks-view3").html(randomDrinkC);
         }
-drinksArray = [];
-        recipeIngredient = $(this).attr("data-category");
 
         switch (recipeIngredient) {
 
@@ -297,37 +296,6 @@ drinksArray = [];
 
       });
     });
-// don't delete this lil guy it's for document.ready
-//keeping this for when we add actual city into the mix
-// var avgWeatherTemp;
-    // $("#search-city").on("click", function (event) {
-    //   event.preventDefault();
-
-
-
-    //   $.ajax({
-    //     url: queryURL,
-    //     method: "GET"
-    //   }).then(function (response) {
-    //     var maxWeatherTemp = response.main.temp_max;
-    //     var minWeatherTemp = response.main.temp_min;
-    //     avgWeatherTemp = (maxWeatherTemp + minWeatherTemp) / 2;
-    //     // $("#weather-view").html("<p>" + avgWeatherTemp + "kelvin </p>");
-    //     if (avgWeatherTemp > 200) {
-    //       var warmWeatherCategories = ["smoothie", "salad", "cold soup"];
-    //       var apiID = "9974c215";
-    //       var apiKey = "66e631dd94f26b89b80cfb12794ede2c";
-    //       var foodURL = "https://api.edamam.com/search?q=" + warmWeatherCategories[0] + "&app_id=" + apiID + "&app_key=" + apiKey;
-    //       $.ajax({
-    //         url: foodURL,
-    //         method: "GET"
-    //       }).then(function (data) {
-    //         console.log(data);
-    //         $("#weather-view").html("<p> Recipe Name: " + data.hits[0].recipe.label + "</p>")
-    //       });
-    //     };
-    //   });
-    // });
   </script>
 </body>
 

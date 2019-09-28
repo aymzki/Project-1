@@ -133,29 +133,38 @@
         var farenheightMin = minWeatherTemp * 9/5 - 459.67;
         var avgWeatherTemp = Math.floor((farenheightMax + farenheightMin) /2);
         console.log(avgWeatherTemp);
-        if(avgWeatherTemp < 50){
-          mainIngredient = "burrr it's cold";
+        if(avgWeatherTemp <= 32){
+          var freezingTempFood = ["beef gravy", "beef", "lamb"];
+          mainIngredient = freezingTempFood[0];
           console.log(mainIngredient);
-          // var freezingTempFood = ["beef gravy", "beef", "lamb"];
-          // mainIngredient = freezingTempFood[0];
-        } 
-        // else if(32 < avgWeatherTemp < 50){
-        //   var coldTempFood = ["rice", "chili powder", "potato"];
-        //   mainIngredient = coldTempFood[0];
-        // } else if(50 < avgWeatherTemp < 80){
-        //   var coldTempFood = ["rice", "chili powder", "potato"];
-        //   mainIngredient = coldTempFood[0];
-        // } else if (81 < avgWeatherTemp < 100){
-        //   var hotTempFood = ["salmon", "avocado"];
-        //   mainIngredient = hotTempFood[0];
-        // } else{
-        //   alert("It's too hot to eat or drink anything other than water. Order in and stay hydrated friends!")
-        //   };
-        // generateRecipes();
-        // console.log(mainIngredient);
-        // $("#city-input").val("");
+        } else if(avgWeatherTemp > 32 && avgWeatherTemp < 50){
+          var coldTempFood = ["rice", "chili powder", "potato"];
+          mainIngredient = coldTempFood[0];
+          console.log(mainIngredient);
+        } else if(51 < avgWeatherTemp && avgWeatherTemp < 80){
+          var warmTempFood = ["chicken", "corn"];
+          mainIngredient = warmTempFood[0];
+          console.log(mainIngredient);
+        } else if (81 < avgWeatherTemp && avgWeatherTemp < 89){
+          var hotTempFood = ["salmon", "avocado"];
+          mainIngredient = hotTempFood[0];
+          console.log(mainIngredient);
+        } else{
+          mainIngredient= null;
+          alert("It's too hot to eat or drink anything other than water. Order in and stay hydrated friends!");
+          console.log(mainIngredient)
+          $("#recipe-view").empty();
+          };
+        generateRecipes();
+        $("#city-input").val("");
       });
     });
+
+
+
+
+
+
 // don't delete this lil guy it's for document.ready
   });
 //keeping this for when we add actual city into the mix

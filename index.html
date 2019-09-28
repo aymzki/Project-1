@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Weather API</title>
+    <!--New Change-->
+
+</head>
+ 
+<body>
+    <!--This is where you type in your city!-->
+    <form>
+        <div class="form-group">
+            <label for="search">Enter Your Location!</label>
+            <input type="entry" class="form-control" id="city-input" placeholder="City,US">
+        </div>
+        <button type="submit" class="btn btn-primary" id="search-city">Submit</button>
+    </form>
+    <!--divs for the results to show once submit button is clicked-->
+    <div class="city"></div>
+    <div class="temp"></div>
+    <div class="weather"></div>
+    <div class="description"></div>
+    <div class="wind"></div>
+    <div class="humidity"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>

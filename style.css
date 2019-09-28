@@ -1,18 +1,34 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 
-.container {
-   
-    width: 100%;
-    height: 100%;
-}
-
-
-body {
-    color: white;
-    font-family: 'Raleway', sans-serif;
+.submitbutton {
     text-align: center;
 }
- 
+
+.container {
+    line-height: 130%;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 250px;
+    color: white;
+    text-shadow: 4px 8px 8px #000000;
+}
+
+
+.homepage {
+    padding-top: 50px;  
+    width: 20%;
+    margin: auto;
+} 
+
+body {
+    background: url(food.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+ }
+
+
 #content {
     grid-template-columns: repeat(8, 1fr);
     grid-auto-rows: 100px 200px;

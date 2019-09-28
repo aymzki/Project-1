@@ -32,10 +32,10 @@
             <h1>Cocktail Search</h1>
 
             <div>
-                <form id="gif-form">
-                    <label for="gif-input">Enter a main recipe ingredient</label>
-                    <input type="text" id="gif-input"><br>
-                    <input id="add-gif" type="submit" value="Submit">
+                <form id="recipeIngredient-form">
+                    <label for="recipeIngredient-input">Enter a main recipe ingredient</label>
+                    <input type="text" id="recipeIngredient-input"><br>
+                    <input id="add-recipeIngredient" type="submit" value="Submit">
                 </form>
             </div>
 
@@ -45,14 +45,23 @@
                 </h2>
             </div>
 
-            <div id="gifs-display""></div>   <!-- Gifs to be displayed here-->
+            <div id="drinks-display1"></div>   <!-- Gifs to be displayed here-->
+            <div id="drinks-display2"></div>   <!-- Gifs to be displayed here-->
+            <div id="drinks-display3"></div>   <!-- Gifs to be displayed here-->
+            <div id="drinks-display"></div>   <!-- Gifs to be displayed here-->
 
-        <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script> <script
-                type="text/javascript">
+    </div>
+
+        
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script> 
+
+    <script type="text/javascript">
+
                     var drinkIngredient = "";
                     var recipeIngredient = "";
+                    var drinksArray = [];
 
-                    function showDrinkNameIdPix() {
+                    function getDrinkID() {
 
                         var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=" + drinkIngredient;
 
@@ -64,14 +73,9 @@
                             var results = response.drinks;
 
                             for (var i = 0; i < results.length; i++) { //to get the drink Names 
-                               
                                 var drinkID = results[i].idDrink;
-
                                 displayFullInfo(drinkID);
-                            
-
                             }
-
 
                         });
                     }
@@ -113,13 +117,13 @@
                                 var newArray = newMeasurementsArray.map((e, i) => e + " " + newIngredientsArray[i]);
 
                                 //creates a new paragraph to store everything into at the end
-                                var newPar= $("<p>");
+                                var measuredIngredientsDisplay= $("<p>");
                                 
-                                //this loops through the new array and stores each combintation in their own div which is appended to the paragraph
+                                //this loops through the new array and stores each combinaation in their own div which is appended to the paragraph
                                 for(var x=0; x < newArray.length; x++){
                                 var newDiv = $("<div>");
                                 newDiv.text(newArray[x]);
-                                newPar.append(newDiv);
+                                measuredIngredientsDisplay.append(newDiv);
                                 }
 
                                 //to get the drink Names 
@@ -137,27 +141,97 @@
 
                                 //create a new div to hold all the stuff above
                                 var bigDiv = $("<div>");
-                                bigDiv.append(nameDisplay, newPar, instructionsDisplay, pixDisplay);
+                                bigDiv.append(nameDisplay, measuredIngredientsDisplay, instructionsDisplay, pixDisplay);
+                                
+                                drinksArray.push(bigDiv); //create a new drinks array
+
                                
                                 //append the div to the well
-                                $("#gifs-display").prepend(bigDiv);
-
+                                // $("#drinks-display").prepend(drinksArray);
+                                
                             }
+
+                            displayThreeDrinks();
                    
-                            });
+                        });
+                       
+                    }
+
+                    function displayThreeDrinks () {
+                        
+                        var randomDrinkA = drinksArray[Math.floor(Math.random() * drinksArray.length+1)];
+                        var randomDrinkB = drinksArray[Math.floor(Math.random() * drinksArray.length+1)];
+                        var randomDrinkC = drinksArray[Math.floor(Math.random() * drinksArray.length+1)];
+                        $("#drinks-display1").html(randomDrinkA);
+                        $("#drinks-display2").html(randomDrinkB);
+                        $("#drinks-display3").html(randomDrinkC);
                     }
 
 
-                    $("#add-gif").on("click", function (event) {
+                    $("#add-recipeIngredient").on("click", function (event) {
                         event.preventDefault();
-                        recipeIngredient = $("#gif-input").val().trim(); //determined by recipe selected
-                        if(recipeIngredient === "chicken") { drinkIngredient = "vodka"; } else {
-                            drinkIngredient = "gin";
-                        } showDrinkNameIdPix(); $("#gif-input").val(""); //clears the search term field when its button is created
+                        
+                        drinksArray = [];
+                        recipeIngredient = $("#recipeIngredient-input").val().trim(); //determined by recipe selected
+                        
+                        switch (recipeIngredient) {
+                            
+                            case "beef":
+                                drinkIngredient = "rum";
+                                break;
+
+                            case "lamb":
+                                drinkIngredient = "rum";
+                                break;
+
+                            case "chilli powder":
+                                drinkIngredient = "gin";
+                                break;
+
+                            case "rice":
+                                drinkIngredient = "gin";
+                                break;
+
+                            case "potato":
+                                drinkIngredient = "gin";
+                                break;
+
+                            case "ground beef":
+                                drinkIngredient = "vodka";
+                                break;
+
+                            case "cod":
+                                drinkIngredient = "vodka";
+                                break;
+
+                            case "corn":
+                                drinkIngredient = "vodka";
+                                break;
+
+                            case "salmon":
+                                drinkIngredient = "ice";
+                                break;
+
+                            case "pasta":
+                                drinkIngredient = "ice";
+                                break;
+
+                            case "avocado":
+                                drinkIngredient = "ice";
+                                break;
+
+                            default:
+                                drinkIngredient = "chocolate";
+                                break;
+                        };
+                        
+                        getDrinkID(); 
+                        
+                        $("#recipeIngredient-input").val(""); //clears the search term field when its button is created
                     }); 
                     
-                    
-                    </script>
+                   
+    </script>
 </body>
 
 </html>

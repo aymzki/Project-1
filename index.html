@@ -50,15 +50,18 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+
   <script type="text/javascript">
+
     $(document).ready(function () {
       var mainIngredient;
       var drinkIngredient;
       var drinksArray = [];
       var recipeIngredient;
+
       function generateRecipes() {
         //on click of button will automatically search for meals with chicken breast as the main ingredient
-        var search = mainIngredient
+        var search = mainIngredient;
         var queryURL = "https://www.themealdb.com/api/json/v2/9973533/filter.php?i=" + search;
         $.ajax({
           url: queryURL,
@@ -124,7 +127,9 @@
             });
           };
         });
+
       };
+
       $("#search-city").on("click", function (event) {
         event.preventDefault();
         $("#recipe-view").empty();
@@ -165,7 +170,9 @@
           $("#city-input").val("");
         });
       });
+
       $(document).on("click", ".image", function () {
+
         function getDrinkID() {
           var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=" + drinkIngredient;
           $.ajax({
@@ -176,15 +183,12 @@
             for (var i = 0; i < results.length; i++) { //to get the drink Names 
               var drinkID = results[i].idDrink;
               displayFullInfo(drinkID);
-              console.log(drinkID)
             }
           });
         };
+        
         function displayFullInfo(drinkID) {
           drinksArray = [];
-          recipeIngredient = mainIngredient
-          console.log("The recipe ingredient is " + mainIngredient);
-
           var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=" + drinkID;
           $.ajax({
             url: queryURL,
@@ -192,7 +196,9 @@
           }).then(function (response) {
             console.log(queryURL);
             console.log(response.drinks);
+
             var results = response.drinks;
+
             for (var i = 0; i < results.length; i++) {
               //stores ingredients into an array - not all ingredients will have something listed
               var ingredients = [results[i].strIngredient1, results[i].strIngredient2, results[i].strIngredient3, results[i].strIngredient4, results[i].strIngredient5, results[i].strIngredient6, results[i].strIngredient7, results[i].strIngredient8, results[i].strIngredient9, results[i].strIngredient10]
@@ -234,6 +240,7 @@
             displayThreeDrinks();
           });
         };
+
         function displayThreeDrinks() {
           var randomDrinkA = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
           var randomDrinkB = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
@@ -242,44 +249,51 @@
           $("#drinks-view2").html(randomDrinkB);
           $("#drinks-view3").html(randomDrinkC);
         }
+
+        recipeIngredient = mainIngredient;
+        
         switch (recipeIngredient) {
+          case "potatoes":
+            drinkIngredient = "coffee";
+            break;
           case "beef":
-            drinkIngredient = "rum";
-            break;
-          case "lamb":
-            drinkIngredient = "rum";
-            break;
-          case "chilli powder":
-            drinkIngredient = "gin";
-            break;
-          case "rice":
-            drinkIngredient = "gin";
-            break;
-          case "potato":
-            drinkIngredient = "gin";
-            break;
-          case "ground beef":
-            drinkIngredient = "vodka";
-            break;
-          case "cod":
-            drinkIngredient = "vodka";
-            break;
-          case "corn":
-            drinkIngredient = "vodka";
-            break;
-          case "salmon":
-            drinkIngredient = "ice";
-            break;
-          case "pasta":
-            drinkIngredient = "ice";
-            break;
-          case "avocado":
-            drinkIngredient = "ice";
-            break;
-          default:
             drinkIngredient = "chocolate";
             break;
-        };
+          case "spinach":
+            drinkIngredient = "tea";
+            break;
+          case "ginger":
+            drinkIngredient = "bourbon";
+            break;
+          case "nutmeg":
+            drinkIngredient = "brandy";
+            break;
+          case "mushrooms":
+            drinkIngredient = "rum";
+            break;
+          case "garlic":
+            drinkIngredient = "vodka";
+            break;
+          case "carrots":
+            drinkIngredient = "gin";
+            break;
+          case "white wine":
+            drinkIngredient = "tequila";
+            break;
+          case "tomatoes":
+            drinkIngredient = "ice";
+            break;
+          case "parsley":
+            drinkIngredient = "beer";
+            break;
+          case "leek":
+            drinkIngredient = "tequila";
+            break;
+          default:
+            drinkIngredient = "milk";
+            break;
+        }
+
         getDrinkID();
       });
     });

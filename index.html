@@ -93,13 +93,25 @@
                 //creates a new image tag to display each image
                 var displayImage = $("<img>");
                 //gets the index of the ingredient index of the first ingredient with just a space as it's content
+                var newIngredientsArray =[];
+                var newMeasurementsArray =[];
                 var firstSpaceIng = ingredients.indexOf(" ");
+                var firstNullIng = ingredients.indexOf(null);
+                if(firstSpaceIng > firstNullIng){
+                newIngredientsArray = ingredients.slice(0, firstSpaceIng);
+                } else{
+                  newIngredientsArray = ingredients.slice(0, firstNullIng);
+                }
                 //uses the firstSpaceIng index to slice off the portion of the array that only has actual ingredients listed and stores them in a new array
-                var newIngredientsArray = ingredients.slice(0, firstSpaceIng);
+                var newMeasurementsArray = [];
                 //gets the index of the measurement index of the first measurement with a just a space as it's content
                 var firstSpaceMeas = measurements.indexOf(" ");
-                //uses the firstSpaceMeas index to slice off the portion of the array that only has actual measuerments listed and stores them in a a new array
-                var newMeasurementsArray = measurements.slice(0, firstSpaceMeas);
+                var firstNullMeas = measurements.indexOf(null);
+                if(firstSpaceMeas > firstNullMeas){
+                  newMeasurementsArray = measurements.slice(0, firstSpaceMeas)
+                } else{
+                  newMeasurementsArray = measurements.slice(0, firstNullMeas);
+                }
                 //this array combines both the measurements array and the ingredients array based on their indexes
                 var newArray = newMeasurementsArray.map((e, i) => e + " " + newIngredientsArray[i]);
                 //this loops through the new array and stores each combintation in their own div which is appended to the paragraph
@@ -318,6 +330,7 @@
 
         getDrinkID();
       });
+
 
     
     });

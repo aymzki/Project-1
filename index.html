@@ -54,9 +54,8 @@
     $(document).ready(function () {
       var mainIngredient;
       var drinkIngredient;
-      var recipeIngredient;
       var drinksArray = [];
-
+      var recipeIngredient;
       function generateRecipes() {
         //on click of button will automatically search for meals with chicken breast as the main ingredient
         var search = mainIngredient
@@ -95,14 +94,26 @@
                 //creates a new image tag to display each image
                 var displayImage = $("<img>");
                 //gets the index of the ingredient index of the first ingredient with just a space as it's content
+                var newIngredientsArray =[];
+                var newMeasurementsArray =[];
                 var firstSpaceIng = ingredients.indexOf(" ");
+                var firstNullIng = ingredients.indexOf(null);
+                if(firstSpaceIng > firstNullIng){
+                newIngredientsArray = ingredients.slice(0, firstSpaceIng);
+                } else{
+                  newIngredientsArray = ingredients.slice(0, firstNullIng);
+                }
                 //uses the firstSpaceIng index to slice off the portion of the array that only has actual ingredients listed and stores them in a new array
-                var newIngredientsArray = ingredients.slice(0, firstSpaceIng);
+                var newMeasurementsArray = [];
                 //gets the index of the measurement index of the first measurement with a just a space as it's content
                 var firstSpaceMeas = measurements.indexOf(" ");
+                var firstNullMeas = measurements.indexOf(null);
+                if(firstSpaceMeas > firstNullMeas){
+                  newMeasurementsArray = measurements.slice(0, firstSpaceMeas)
+                } else{
+                  newMeasurementsArray = measurements.slice(0, firstNullMeas);
+                }
                 //uses the firstSpaceMeas index to slice off the portion of the array that only has actual measuerments listed and stores them in a a new array
-                var newMeasurementsArray = measurements.slice(0, firstSpaceMeas);
-
                 //this array combines both the measurements array and the ingredients array based on their indexes
                 var newArray = newMeasurementsArray.map((e, i) => e + " " + newIngredientsArray[i]);
                 //this loops through the new array and stores each combintation in their own div which is appended to the paragraph
@@ -114,7 +125,6 @@
                 displayImage.attr("src", image);
                 displayImage.attr("data-category", mealResults[0].strCategory);
                 displayImage.addClass("image");
-
                 parentRow.addClass("row px-0");
                 leftColDiv.append(displayImage);
                 leftColDiv.addClass("col-6 pl-0");
@@ -128,12 +138,10 @@
           };
         });
       };
-
       $("#search-city").on("click", function (event) {
         event.preventDefault();
         $("#recipe-view").empty();
         mainIngredient;
-
         var city = $("#city-input").val();
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=166a433c57516f51dfab1f7edaed8413"
         $.ajax({
@@ -170,7 +178,6 @@
           $("#city-input").val("");
         });
       });
-
       $(document).on("click", ".image", function () {
         function getDrinkID() {
           var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=" + drinkIngredient;
@@ -186,10 +193,10 @@
             }
           });
         };
-
         function displayFullInfo(drinkID) {
           drinksArray = [];
-          recipeIngredient = $(this).attr("data-category");
+          recipeIngredient = mainIngredient
+          console.log("The recipe ingredient is " + mainIngredient);
           var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=" + drinkID;
           $.ajax({
             url: queryURL,
@@ -201,10 +208,8 @@
             for (var i = 0; i < results.length; i++) {
               //stores ingredients into an array - not all ingredients will have something listed
               var ingredients = [results[i].strIngredient1, results[i].strIngredient2, results[i].strIngredient3, results[i].strIngredient4, results[i].strIngredient5, results[i].strIngredient6, results[i].strIngredient7, results[i].strIngredient8, results[i].strIngredient9, results[i].strIngredient10]
-
               //stores measurements into an array - not all measurements will have something listed
               var measurements = [results[i].strMeasure1, results[i].strMeasure2, results[i].strMeasure3, results[i].strMeasure4, results[i].strMeasure5, results[i].strMeasure6, results[i].strMeasure7, results[i].strMeasure8, results[i].strMeasure9, results[i].strMeasure10]
-
               //filters the ingredients array of nulls and undefineds
               var newIngredientsArray = ingredients.filter(function (element) {
                 return element != null && element != "" && element != 0 && element != NaN && element != undefined && element != false;
@@ -217,7 +222,6 @@
               var newArray = newMeasurementsArray.map((e, i) => e + " " + newIngredientsArray[i]);
               //creates a new paragraph to store everything into at the end
               var measuredIngredientsDisplay = $("<p>");
-
               //this loops through the new array and stores each combinaation in their own div which is appended to the paragraph
               for (var x = 0; x < newArray.length; x++) {
                 var newDiv = $("<div>");
@@ -243,7 +247,6 @@
           });
         };
         function displayThreeDrinks() {
-
           var randomDrinkA = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
           var randomDrinkB = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
           var randomDrinkC = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
@@ -251,9 +254,7 @@
           $("#drinks-view2").html(randomDrinkB);
           $("#drinks-view3").html(randomDrinkC);
         }
-
         switch (recipeIngredient) {
-
           case "beef":
             drinkIngredient = "rum";
             break;
@@ -291,9 +292,7 @@
             drinkIngredient = "chocolate";
             break;
         };
-
         getDrinkID();
-
       });
     });
   </script>

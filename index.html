@@ -32,15 +32,11 @@
 
     </div>
 
-    <div id="drinks-view1" class="container px-0">
+    <div id="drinks-view" class="container px-0">
 
     </div>
 
-    <div id="drinks-view2" class="container px-0">
-
-    </div>
-
-    <div id="drinks-view3" class="container px-0">
+    <div id="selected-drink" class="container px-0">
 
     </div>
 
@@ -133,6 +129,8 @@
       $("#search-city").on("click", function (event) {
         event.preventDefault();
         $("#recipe-view").empty();
+        $("#drinks-view").empty();
+
         mainIngredient;
         var city = $("#city-input").val();
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=166a433c57516f51dfab1f7edaed8413"
@@ -245,49 +243,73 @@
           var randomDrinkA = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
           var randomDrinkB = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
           var randomDrinkC = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
-          $("#drinks-view1").html(randomDrinkA);
-          $("#drinks-view2").html(randomDrinkB);
-          $("#drinks-view3").html(randomDrinkC);
+          var drinksDiv = $("<div>");
+          drinksDiv.append(randomDrinkA, randomDrinkB, randomDrinkC);
+          $("#drinks-view").html(drinksDiv)
         }
 
         recipeIngredient = mainIngredient;
         
         switch (recipeIngredient) {
           case "potatoes":
-            drinkIngredient = "coffee";
+            var freezingDrinks = ["coffee", "chocolate", "tea"];
+            var freezingIndex = [Math.floor(Math.random() * freezingDrinks.length+1)];
+            drinkIngredient = freezingDrinks[freezingIndex];
             break;
           case "beef":
-            drinkIngredient = "chocolate";
+            var freezingDrinks = ["coffee", "chocolate", "tea"];
+            var freezingIndex = [Math.floor(Math.random() * freezingDrinks.length+1)];
+            drinkIngredient = freezingDrinks[freezingIndex];
             break;
           case "spinach":
-            drinkIngredient = "tea";
+            var freezingDrinks = ["coffee", "chocolate", "tea"];
+            var freezingIndex = [Math.floor(Math.random() * freezingDrinks.length+1)];
+            drinkIngredient = freezingDrinks[freezingIndex];
             break;
           case "ginger":
-            drinkIngredient = "bourbon";
+            var coldDrinks = ["bourbon", "brandy", "rum"];
+            var coldIndex = [Math.floor(Math.random() * coldDrinks.length+1)];
+            drinkIngredient = coldDrinks[coldIndex];
             break;
           case "nutmeg":
-            drinkIngredient = "brandy";
+            var coldDrinks = ["bourbon", "brandy", "rum"];
+            var coldIndex = [Math.floor(Math.random() * coldDrinks.length+1)];
+            drinkIngredient = coldDrinks[coldIndex];
             break;
           case "mushrooms":
-            drinkIngredient = "rum";
+            var coldDrinks = ["bourbon", "brandy", "rum"];
+            var coldIndex = [Math.floor(Math.random() * coldDrinks.length+1)];
+            drinkIngredient = coldDrinks[coldIndex];
             break;
           case "garlic":
-            drinkIngredient = "vodka";
+            var warmDrinks = ["vodka", "gin", "brandy"];
+            var warmIndex = [Math.floor(Math.random() * warmDrinks.length+1)];
+            drinkIngredient = warmDrinks[warmIndex];
             break;
           case "carrots":
-            drinkIngredient = "gin";
+            var warmDrinks = ["vodka", "gin", "brandy"];
+            var warmIndex = [Math.floor(Math.random() * warmDrinks.length+1)];
+            drinkIngredient = warmDrinks[warmIndex];
             break;
           case "white wine":
-            drinkIngredient = "tequila";
+            var warmDrinks = ["vodka", "gin", "brandy"];
+            var warmIndex = [Math.floor(Math.random() * warmDrinks.length+1)];
+            drinkIngredient = warmDrinks[warmIndex];
             break;
           case "tomatoes":
-            drinkIngredient = "ice";
+            var hotDrinks = ["ice", "beer", "tequila"];
+            var hotIndex = [Math.floor(Math.random() * hotDrinks.length+1)];
+            drinkIngredient = hotDrinks[hotIndex];
             break;
           case "parsley":
-            drinkIngredient = "beer";
+            var hotDrinks = ["ice", "beer", "tequila"];
+            var hotIndex = [Math.floor(Math.random() * hotDrinks.length+1)];
+            drinkIngredient = hotDrinks[hotIndex];
             break;
           case "leek":
-            drinkIngredient = "tequila";
+            var hotDrinks = ["ice", "beer", "tequila"];
+            var hotIndex = [Math.floor(Math.random() * hotDrinks.length+1)];
+            drinkIngredient = hotDrinks[hotIndex];
             break;
           default:
             drinkIngredient = "milk";
@@ -296,6 +318,8 @@
 
         getDrinkID();
       });
+
+    
     });
   </script>
 </body>

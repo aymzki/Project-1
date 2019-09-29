@@ -1,3 +1,4 @@
+
 ///////////////////////////////FIRST RENDER THE WEATHER
 $(document).ready(function () {
 
@@ -196,3 +197,6 @@ $(document).ready(function () {
 
 
     });
+
+});
+

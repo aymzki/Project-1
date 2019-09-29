@@ -1,49 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <title>Favorite Movies</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <style type="text/css">
-    img {
-      width: 100%;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <h1>Weather Search</h1>
-
-    <!-- Rendered Buttons will get Dumped Here  -->
-
-    <form id="search-form">
-      <label for="city-input">Search a city</label>
-      <input type="text" id="city-input"><br>
-
-      <!-- Button triggers new movie to be added -->
-      <input id="search-city" type="submit" value="Search">
-    </form>
-
-    <!-- Movies will Get Dumped Here -->
-    <div id="recipe-view" class="container px-0">
-
-    </div>
-
-    <div id="drinks-view" class="container px-0">
-
-    </div>
-
-  </div>
-
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
-
-  <script type="text/javascript">
 
     $(document).ready(function () {
       var mainIngredient;
@@ -327,10 +281,5 @@
         getDrinkID();
       });
 
-
-    
     });
-  </script>
-</body>
 
-</html>

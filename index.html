@@ -32,15 +32,7 @@
 
     </div>
 
-    <div id="drinks-view1" class="container px-0">
-
-    </div>
-
-    <div id="drinks-view2" class="container px-0">
-
-    </div>
-
-    <div id="drinks-view3" class="container px-0">
+    <div id="drinks-view" class="container px-0">
 
     </div>
 
@@ -50,15 +42,18 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+
   <script type="text/javascript">
+
     $(document).ready(function () {
       var mainIngredient;
       var drinkIngredient;
       var drinksArray = [];
       var recipeIngredient;
+
       function generateRecipes() {
         //on click of button will automatically search for meals with chicken breast as the main ingredient
-        var search = mainIngredient
+        var search = mainIngredient;
         var queryURL = "https://www.themealdb.com/api/json/v2/9973533/filter.php?i=" + search;
         $.ajax({
           url: queryURL,
@@ -113,7 +108,6 @@
                 } else{
                   newMeasurementsArray = measurements.slice(0, firstNullMeas);
                 }
-                //uses the firstSpaceMeas index to slice off the portion of the array that only has actual measuerments listed and stores them in a a new array
                 //this array combines both the measurements array and the ingredients array based on their indexes
                 var newArray = newMeasurementsArray.map((e, i) => e + " " + newIngredientsArray[i]);
                 //this loops through the new array and stores each combintation in their own div which is appended to the paragraph
@@ -137,10 +131,14 @@
             });
           };
         });
+
       };
+
       $("#search-city").on("click", function (event) {
         event.preventDefault();
         $("#recipe-view").empty();
+        $("#drinks-view").empty();
+
         mainIngredient;
         var city = $("#city-input").val();
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=166a433c57516f51dfab1f7edaed8413"
@@ -178,7 +176,9 @@
           $("#city-input").val("");
         });
       });
+
       $(document).on("click", ".image", function () {
+
         function getDrinkID() {
           var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=" + drinkIngredient;
           $.ajax({
@@ -189,14 +189,12 @@
             for (var i = 0; i < results.length; i++) { //to get the drink Names 
               var drinkID = results[i].idDrink;
               displayFullInfo(drinkID);
-              console.log(drinkID)
             }
           });
         };
+        
         function displayFullInfo(drinkID) {
           drinksArray = [];
-          recipeIngredient = mainIngredient
-          console.log("The recipe ingredient is " + mainIngredient);
           var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=" + drinkID;
           $.ajax({
             url: queryURL,
@@ -204,7 +202,9 @@
           }).then(function (response) {
             console.log(queryURL);
             console.log(response.drinks);
+
             var results = response.drinks;
+
             for (var i = 0; i < results.length; i++) {
               //stores ingredients into an array - not all ingredients will have something listed
               var ingredients = [results[i].strIngredient1, results[i].strIngredient2, results[i].strIngredient3, results[i].strIngredient4, results[i].strIngredient5, results[i].strIngredient6, results[i].strIngredient7, results[i].strIngredient8, results[i].strIngredient9, results[i].strIngredient10]
@@ -246,54 +246,89 @@
             displayThreeDrinks();
           });
         };
+
         function displayThreeDrinks() {
           var randomDrinkA = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
           var randomDrinkB = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
           var randomDrinkC = drinksArray[Math.floor(Math.random() * drinksArray.length + 1)];
-          $("#drinks-view1").html(randomDrinkA);
-          $("#drinks-view2").html(randomDrinkB);
-          $("#drinks-view3").html(randomDrinkC);
+          var drinksDiv = $("<div>");
+          drinksDiv.append(randomDrinkA, randomDrinkB, randomDrinkC);
+          $("#drinks-view").html(drinksDiv)
         }
+
+        recipeIngredient = mainIngredient;
+        
         switch (recipeIngredient) {
+          case "potatoes":
+            var freezingDrinks = ["coffee", "chocolate", "tea"];
+            var freezingIndex = [Math.floor(Math.random() * freezingDrinks.length+1)];
+            drinkIngredient = freezingDrinks[freezingIndex];
+            break;
           case "beef":
-            drinkIngredient = "rum";
+            var freezingDrinks = ["coffee", "chocolate", "tea"];
+            var freezingIndex = [Math.floor(Math.random() * freezingDrinks.length+1)];
+            drinkIngredient = freezingDrinks[freezingIndex];
             break;
-          case "lamb":
-            drinkIngredient = "rum";
+          case "spinach":
+            var freezingDrinks = ["coffee", "chocolate", "tea"];
+            var freezingIndex = [Math.floor(Math.random() * freezingDrinks.length+1)];
+            drinkIngredient = freezingDrinks[freezingIndex];
             break;
-          case "chilli powder":
-            drinkIngredient = "gin";
+          case "ginger":
+            var coldDrinks = ["bourbon", "brandy", "rum"];
+            var coldIndex = [Math.floor(Math.random() * coldDrinks.length+1)];
+            drinkIngredient = coldDrinks[coldIndex];
             break;
-          case "rice":
-            drinkIngredient = "gin";
+          case "nutmeg":
+            var coldDrinks = ["bourbon", "brandy", "rum"];
+            var coldIndex = [Math.floor(Math.random() * coldDrinks.length+1)];
+            drinkIngredient = coldDrinks[coldIndex];
             break;
-          case "potato":
-            drinkIngredient = "gin";
+          case "mushrooms":
+            var coldDrinks = ["bourbon", "brandy", "rum"];
+            var coldIndex = [Math.floor(Math.random() * coldDrinks.length+1)];
+            drinkIngredient = coldDrinks[coldIndex];
             break;
-          case "ground beef":
-            drinkIngredient = "vodka";
+          case "garlic":
+            var warmDrinks = ["vodka", "gin", "brandy"];
+            var warmIndex = [Math.floor(Math.random() * warmDrinks.length+1)];
+            drinkIngredient = warmDrinks[warmIndex];
             break;
-          case "cod":
-            drinkIngredient = "vodka";
+          case "carrots":
+            var warmDrinks = ["vodka", "gin", "brandy"];
+            var warmIndex = [Math.floor(Math.random() * warmDrinks.length+1)];
+            drinkIngredient = warmDrinks[warmIndex];
             break;
-          case "corn":
-            drinkIngredient = "vodka";
+          case "white wine":
+            var warmDrinks = ["vodka", "gin", "brandy"];
+            var warmIndex = [Math.floor(Math.random() * warmDrinks.length+1)];
+            drinkIngredient = warmDrinks[warmIndex];
             break;
-          case "salmon":
-            drinkIngredient = "ice";
+          case "tomatoes":
+            var hotDrinks = ["ice", "beer", "tequila"];
+            var hotIndex = [Math.floor(Math.random() * hotDrinks.length+1)];
+            drinkIngredient = hotDrinks[hotIndex];
             break;
-          case "pasta":
-            drinkIngredient = "ice";
+          case "parsley":
+            var hotDrinks = ["ice", "beer", "tequila"];
+            var hotIndex = [Math.floor(Math.random() * hotDrinks.length+1)];
+            drinkIngredient = hotDrinks[hotIndex];
             break;
-          case "avocado":
-            drinkIngredient = "ice";
+          case "leek":
+            var hotDrinks = ["ice", "beer", "tequila"];
+            var hotIndex = [Math.floor(Math.random() * hotDrinks.length+1)];
+            drinkIngredient = hotDrinks[hotIndex];
             break;
           default:
-            drinkIngredient = "chocolate";
+            drinkIngredient = "milk";
             break;
-        };
+        }
+
         getDrinkID();
       });
+
+
+    
     });
   </script>
 </body>

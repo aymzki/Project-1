@@ -1,112 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--Bootstrap-->
-    <div>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
-    <title>wEATherly</title>
-    </div>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Parallax Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="assets/CSS/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="assets/CSS/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-
-
 <body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">wEATherly</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
 
-    <!-----------------------NAVBAR--------------------------->
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" id="home" href="#">wEATherly <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Favorites</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!----------------------WEATHER DISPLAY---------------------------->
-
-    <form>
-        <div class="form-group">
-            <label for="search">Enter Your Location!</label>
-            <input type="entry" class="form-control" id="city-input" placeholder="City,US">
-        </div>
-        <button type="submit" class="btn btn-primary" id="search-city">Submit</button>
-    </form>
-    <!--divs for the results to show once submit button is clicked-->
-    <div class="city"></div>
-    <div class="temp"></div>
-    <div class="weather"></div>
-    <div class="description"></div>
-    <div class="wind"></div>
-    <div class="humidity"></div>
-
-    <!-----------------------RECIPE DISPLAY--------------------------->
-
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
-    <div class="card-columns">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="..." id="recimg">
-            <div class="card-body">
-                <h5 class="card-title" id="reciname">Title</h5>
-                <p class="card-text" id="recisum">Recipe </p>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2">wEATherly</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Designing a Seasonal Meal from your current Place and Time</h5>
+        </div>
+        <div class="row center">
+          <div class="col s12">
+            Tell us your current location:
+            <div class="input-field inline">
+              <input id="email_inline" type="email" class="validate">
+              <label for="email_inline">City, Country</label>
+              <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
             </div>
-        </div>
-        <div class="card p-3">
-            <blockquote class="blockquote mb-0 card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">
-                    <small class="text-muted">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
-                    </small>
-                </footer>
-            </blockquote>
-        </div>
+        <br><br>
 
-    <!----------------------DRINK DISPLAY---------------------------->
-
-    <div>
-        <h1>Cocktail Search</h1>
-
-        <div>
-                <form id="recipeIngredient-form">
-                    <label for="recipeIngredient-input">Enter a main recipe ingredient</label>
-                    <input type="text" id="recipeIngredient-input"><br>
-                    <input id="add-recipeIngredient" type="submit" value="Submit">
-                </form>
-        </div>
-
-        <div>
-                <h2>
-                    Your Cocktails:
-                </h2>
-        </div>
-            <div id="drinks-display1"></div> <!-- Gifs to be displayed here-->
-            <div id="drinks-display2"></div> <!-- Gifs to be displayed here-->
-            <div id="drinks-display3"></div> <!-- Gifs to be displayed here-->
-            <div id="drinks-display"></div> <!-- Gifs to be displayed here-->
+      </div>
     </div>
+    <div class="parallax"><img src="assets/IMG/background1.jpg" alt="Unsplashed background img 1"></div>
+  </div>
 
-    <!------------------------FAVORITES DISPLAY-------------------------->
-    <!------------------------FAVORITES DISPLAY-------------------------->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
-    <script src="assets/javascript/app.js"></script>
 
-</body>
+  <div class="container">
+    <div class="section">
 
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Your weather surroundings</h5>
+
+            <p class="light">Temperature, Weather, Wind, Humidity</p>
+          
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">The Findings Decoded</h5>
+
+            <p class="light">Here we'll place a small layman's description of how the data affects your body.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Our Data Interpretation</h5>
+
+            <p class="light">Here we can provide our suggessted categories that reflect the mood of the findings.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="assets/IMG/background2.jpg" alt="Unsplashed background img 2"></div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4>Suggested Recipes</h4>
+          <p class="left-align light">Choose one of the recipes we curated from your weather data.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light"></h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="assets/IMG/background3.jpg" alt="Unsplashed background img 3"></div>
+  </div>
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Group Bio</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect with the Team</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Alexander Briody</a></li>
+            <li><a class="white-text" href="#!">Alissa Yamazaki</a></li>
+            <li><a class="white-text" href="#!">Catherine Gomez</a></li>
+            <li><a class="white-text" href="#!">Ky O'Brien</a></li>
+            <li><a class="white-text" href="#!">Maura Fortino</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made Using <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="assets/JS/materialize.js"></script>
+  <script src="assets/JS/init.js"></script>
+
+  </body>
 </html>

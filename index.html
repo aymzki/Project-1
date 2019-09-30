@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <title>wEATherly</title>
+</head>
+
+
+<body>
+
+    <!-----------------------NAVBAR--------------------------->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" id="home" href="#">wEATherly <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Favorites</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!----------------------WEATHER DISPLAY---------------------------->
+
+    <form>
+        <div class="form-group">
+            <label for="search">Enter Your Location!</label>
+            <input type="entry" class="form-control" id="city-input" placeholder="City,US">
+        </div>
+        <button type="submit" class="btn btn-primary" id="search-city">Submit</button>
+    </form>
+    <!--divs for the results to show once submit button is clicked-->
+    <div class="city"></div>
+    <div class="temp"></div>
+    <div class="weather"></div>
+    <div class="description"></div>
+    <div class="wind"></div>
+    <div class="humidity"></div>
+
+    <!-----------------------RECIPE DISPLAY--------------------------->
+
+    </div>
+    <div class="card-columns">
+        <div class="card">
+            <img src="..." class="card-img-top" alt="..." id="recimg">
+            <div class="card-body">
+                <h5 class="card-title" id="reciname">Title</h5>
+                <p class="card-text" id="recisum">Recipe </p>
+            </div>
+        </div>
+        <div class="card p-3">
+            <blockquote class="blockquote mb-0 card-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">
+                    <small class="text-muted">
+                        Someone famous in <cite title="Source Title">Source Title</cite>
+                    </small>
+                </footer>
+            </blockquote>
+        </div>
+
+    <!----------------------DRINK DISPLAY---------------------------->
+
+    <div>
+        <h1>Cocktail Search</h1>
+
+        <div>
+                <form id="recipeIngredient-form">
+                    <label for="recipeIngredient-input">Enter a main recipe ingredient</label>
+                    <input type="text" id="recipeIngredient-input"><br>
+                    <input id="add-recipeIngredient" type="submit" value="Submit">
+                </form>
+        </div>
+
+        <div>
+                <h2>
+                    Your Cocktails:
+                </h2>
+        </div>
+            <div id="drinks-display1"></div> <!-- Gifs to be displayed here-->
+            <div id="drinks-display2"></div> <!-- Gifs to be displayed here-->
+            <div id="drinks-display3"></div> <!-- Gifs to be displayed here-->
+            <div id="drinks-display"></div> <!-- Gifs to be displayed here-->
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+    <script src="assets/javascript/app.js"></script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-# wEATerly
+# wEATherly
 
 A food app that generates recipes and beverages based on your weather/location.
 

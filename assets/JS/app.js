@@ -75,11 +75,19 @@ $(document).ready(function () {
               displayImage.attr("src", image);
               displayImage.attr("data-category", mealResults[0].strCategory);
               displayImage.addClass("image");
+              displayImage.addClass("z-depth-5");
+              //RECIPE BLOCK
               parentRow.addClass("row px-0");
+              //IMAGE DIV CONTAINER
               leftColDiv.append(displayImage);
               leftColDiv.addClass("col-6 pl-0");
+
+              //INGRIDIENTS
               rightColDiv.addClass("col-6");
               childRow.append(instructions);
+
+
+              //INSTRUCTIONS
               childRow.addClass("row mx-0");
               $(parentRow).append(leftColDiv, rightColDiv, childRow);
               $("#recipe-view").append(parentRow);
@@ -174,13 +182,15 @@ $(document).ready(function () {
             //this array combines both the measurements array and the ingredients array based on their indexes
             var newArray = newMeasurementsArray.map((e, i) => e + " " + newIngredientsArray[i]);
             //creates a new paragraph to store everything into at the end
-            var measuredIngredientsDisplay = $("<p>");
-            //this loops through the new array and stores each combinaation in their own div which is appended to the paragraph
+            var measuredIngredientsDisplay = $("<td>");
+            //this loops through the new array and stores each combination in their own div which is appended to the paragraph
+            
             for (var x = 0; x < newArray.length; x++) {
-              var newDiv = $("<div>");
-              newDiv.text(newArray[x]);
-              measuredIngredientsDisplay.append(newDiv);
+              var newTable = $("<table>");
+              newTable.text(newArray[x]);
+              measuredIngredientsDisplay.append(newTable);
             }
+
             //to get the drink Names 
             var drinkName = results[i].strDrink;
             var nameDisplay = $("<p>").text(drinkName);
@@ -191,6 +201,7 @@ $(document).ready(function () {
             var pixDisplay = $("<img>");
             pixDisplay.attr("src", results[i].strDrinkThumb);
             pixDisplay.attr("class", "drinkGif");
+            pixDisplay.addClass("z-depth-5");
             //create a new div to hold all the stuff above
             var bigDiv = $("<div>");
             bigDiv.append(nameDisplay, measuredIngredientsDisplay, instructionsDisplay, pixDisplay);

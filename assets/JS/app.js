@@ -4,6 +4,7 @@ $(document).ready(function () {
   var drinkIngredient;
   var drinksArray = [];
   var recipeIngredient;
+
   var chosenFoodName;
   var chosenFoodInstructions;
   var chosenFoodRecipe;
@@ -20,6 +21,7 @@ $(document).ready(function () {
     //on click of button will automatically search for meals with chicken breast as the main ingredient
     var search = mainIngredient;
     var queryURL = "https://www.themealdb.com/api/json/v2/9973533/filter.php?i=" + search;
+    console.log(search);
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -38,9 +40,11 @@ $(document).ready(function () {
         }).then(function (data) {
           //for each meal ID get the necessary information
           var mealResults = data.meals;
+
           for (var j = 0; j < 10; j++) {
             //store ingredients into an array - not all ingredients will have something listed
             var ingredients = [mealResults[j].strIngredient1, mealResults[j].strIngredient2, mealResults[j].strIngredient3, mealResults[j].strIngredient4, mealResults[j].strIngredient5, mealResults[j].strIngredient6, mealResults[j].strIngredient7, mealResults[j].strIngredient8, mealResults[j].strIngredient9, mealResults[j].strIngredient10, mealResults[j].strIngredient11, mealResults[j].strIngredient12, mealResults[j].strIngredient13, mealResults[j].strIngredient14, mealResults[j].strIngredient15, mealResults[j].strIngredient16, mealResults[j].strIngredient17, mealResults[j].strIngredient18, mealResults[j].strIngredient19, mealResults[j].strIngredient20,]
+            console.log(mealResults[j].strIngredient1);
             //store measurements into an array - not all measurements will have something listed
             var measurements = [mealResults[j].strMeasure1, mealResults[j].strMeasure2, mealResults[j].strMeasure3, mealResults[j].strMeasure4, mealResults[j].strMeasure5, mealResults[j].strMeasure6, mealResults[j].strMeasure7, mealResults[j].strMeasure8, mealResults[j].strMeasure9, mealResults[j].strMeasure10, mealResults[j].strMeasure11, mealResults[j].strMeasure12, mealResults[j].strMeasure13, mealResults[j].strMeasure14, mealResults[j].strMeasure15, mealResults[j].strMeasure16, mealResults[j].strMeasure17, mealResults[j].strMeasure18, mealResults[j].strMeasure19, mealResults[j].strMeasure20,]
             //store instructions into an array
@@ -59,23 +63,6 @@ $(document).ready(function () {
             //gets the index of the ingredient index of the first ingredient with just a space as it's content
             var newIngredientsArray = [];
             var newMeasurementsArray = [];
-            // var firstSpaceIng = ingredients.indexOf(" ");
-            // var firstNullIng = ingredients.indexOf(null);
-            // if (firstSpaceIng > firstNullIng) {
-            //   newIngredientsArray = ingredients.slice(0, firstSpaceIng);
-            // } else {
-            //   newIngredientsArray = ingredients.slice(0, firstNullIng);
-            // }
-            //uses the firstSpaceIng index to slice off the portion of the array that only has actual ingredients listed and stores them in a new array
-            // var newMeasurementsArray = [];
-            //gets the index of the measurement index of the first measurement with a just a space as it's content
-            // var firstSpaceMeas = measurements.indexOf(" ");
-            // var firstNullMeas = measurements.indexOf(null);
-            // if (firstSpaceMeas > firstNullMeas) {
-            //   newMeasurementsArray = measurements.slice(0, firstSpaceMeas)
-            // } else {
-            //   newMeasurementsArray = measurements.slice(0, firstNullMeas);
-            // } //filters the ingredients array of nulls and undefineds
             var newIngredientsArray = ingredients.filter(function (element) {
               return element != null && element != "" && element != 0 && element != NaN && element != undefined && element != false;
             });
@@ -238,6 +225,9 @@ $(document).ready(function () {
           //to get the jpgs
           var pixDisplay = $("<img>");
           pixDisplay.attr("src", results[i].strDrinkThumb);
+          pixDisplay.attr("data-name", results[i].strDrink);
+          pixDisplay.attr("data-instructions", results[i].strInstructions);
+          pixDisplay.attr("data-recipe", newArray);
           pixDisplay.attr("class", "drinkGif");
           pixDisplay.addClass("z-depth-5");
           //create a new div to hold all the stuff above
@@ -327,7 +317,8 @@ $(document).ready(function () {
     }
     getDrinkID();
   });
-  $(document).on("click", ".drinks", function () {
+
+  $(document).on("click", ".drinkGif", function () {
     $("#meal-view").empty();
     chosenDrinkImage = $(this).attr("src");
     chosenDrinkInstructions = $(this).attr("data-instructions");
@@ -346,6 +337,7 @@ $(document).ready(function () {
     foodDiv.append(foodHeader, foodImage, chosenFoodRecipe, chosenFoodInstructions);
     drinkDiv.append(drinkHeader, drinkImage, chosenDrinkRecipe, chosenDrinkInstructions);
     $("#meal-view").append(foodDiv, drinkDiv);
-    console.log(chosenFoodRecipe);
+
+    console.log("Your meal is: " + chosenFoodRecipe);
   });
 });

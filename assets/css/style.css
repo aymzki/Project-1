@@ -131,6 +131,17 @@ p {
   }
 }
 
+#index-banner h5 {
+  size: 50px;
+  font-weight: bold;
+  font-family: ‘Raleway’, sans-serif;
+  text-shadow: 10px 10px 10px #000000;
+ }
+ 
+ #index-banner {
+  font-family: ‘Handlee’, cursive;
+ }
+
 @media only screen and (max-width : 600px) {
   #index-banner .section {
     top: 0;

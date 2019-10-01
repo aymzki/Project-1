@@ -4,6 +4,16 @@ $(document).ready(function () {
   var drinkIngredient;
   var drinksArray = [];
   var recipeIngredient;
+  var chosenFoodName;
+  var chosenFoodInstructions;
+  var chosenFoodRecipe;
+  var chosenFoodImage;
+  //variables for the chosen drink recipe
+  var chosenDrinkName;
+  var chosenDrinkInstructions;
+  var chosenDrinkRecipe;
+  var chosenDrinkImage;
+
 
   function generateRecipes() {
 
@@ -159,6 +169,10 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".image", function () {
+    chosenFoodImage = $(this).attr("src");
+       chosenFoodInstructions = $(this).attr("data-instructions");
+       chosenFoodName = $(this).attr("data-name");
+       chosenFoodRecipe = $(this).attr("data-recipe");
     function getDrinkID() {
       var queryURL = "https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=" + drinkIngredient;
       $.ajax({
@@ -313,5 +327,25 @@ $(document).ready(function () {
     }
     getDrinkID();
   });
-
+  $(document).on("click", ".drinks", function () {
+    $("#meal-view").empty();
+    chosenDrinkImage = $(this).attr("src");
+    chosenDrinkInstructions = $(this).attr("data-instructions");
+    chosenDrinkName = $(this).attr("data-name");
+    chosenDrinkRecipe = $(this).attr("data-recipe");
+    var foodDiv = $("<div>");
+    var drinkDiv = $("<div>");
+    var foodHeader = $("<h2>");
+    var drinkHeader = $("<h2>");
+    var foodImage = $("<img>");
+    var drinkImage = $("<img>");
+    drinkHeader.text(chosenDrinkName);
+    drinkImage.attr("src", chosenDrinkImage);
+    foodHeader.text(chosenFoodName);
+    foodImage.attr("src", chosenFoodImage);
+    foodDiv.append(foodHeader, foodImage, chosenFoodRecipe, chosenFoodInstructions);
+    drinkDiv.append(drinkHeader, drinkImage, chosenDrinkRecipe, chosenDrinkInstructions);
+    $("#meal-view").append(foodDiv, drinkDiv);
+    console.log(chosenFoodRecipe);
+  });
 });
